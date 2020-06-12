@@ -30,7 +30,6 @@
     <input type="button" value="+" onmousedown="aa=setInterval('colorch(1)',200)" onmouseup="clearInterval(aa)">
     <input type="button" value="-" onmousedown="bb=setInterval('colorch(2)',200)" onmouseup="clearInterval(bb)">
     <input type="button" value="?" onmousedown="cc=setInterval(randcolor,200)" onmouseup="clearInterval(cc)">
-
     <script>
         let note = document.getElementById('taget');
         let color= note.style.backgroundColor;
@@ -60,7 +59,6 @@
             }
         }
         function randcolor() {
-            // console.log('randcolor');
             let R=Math.floor(Math.random() * 256);
             let G=Math.floor(Math.random() * 256);
             let B=Math.floor(Math.random() * 256);
@@ -71,7 +69,6 @@
             opp();
         }
         function colorch(e) {
-            // console.log('colorAdd');
             let k=exploxx();
             if(e == 1){
                 k[0]++;
@@ -108,7 +105,6 @@
             document.getElementById('word').textContent=`#${a0}${a1}${a2}`;
         }     
         function ran(e) {
-            // console.log(e);
             let k=exploxx();
             switch (e) {
                 case 1:
@@ -127,8 +123,6 @@
             note.style.backgroundColor=`rgb(${k[0]},${k[1]},${k[2]})`; 
             opp();
         }
-
-    </script>    
-    
+    </script>       
 </body>
 </html>
