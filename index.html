@@ -1,138 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>顏色選擇器</title>
     <link rel="stylesheet" href="./plugins/bootstrap.css">
+    <script src="./plugins/sweetalert2.all.js"></script>
     <style>
-        .aa{
+        .aa {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 60vh;
         }
-        .bb{
+
+        .bb {
             font-weight: 500;
             font-size: 3rem;
         }
-        .cc{
+
+        .cc {
             width: 90%;
         }
-        .btn{
+
+        .btn {
             width: 10%;
             font-size: 1.5rem;
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5">
-    <div id="taget" class="aa w-100 card" style="background-color:rgb(100,100,100);">
-    <span class="bb" id="word">BAA</span>
-    </div>
-    <hr>
-    <input type="button" class="btn btn-danger" value="R" onclick="alte('R')"><input class="cc" type="range" id="ranR" min="0" max="255" step="1" onclick="ran(1)"><br>
-    <input type="button" class="btn btn-success mt-1" value="G" onclick="alte('G')"><input class="cc" type="range" id="ranG"  min="0" max="255" step="1" onclick="ran(2)"><br>
-    <input type="button" class="btn btn-primary mt-1" value="B" onclick="alte('B')"><input class="cc" type="range" id="ranB"  min="0" max="255" step="1" onclick="ran(3)"><br><br>
-    <div class="d-flex justify-content-lg-between">
-        <input type="button" class="btn btn-secondary" value="+" onmousedown="aa=setInterval('colorch(1)',200)" onmouseup="clearInterval(aa)">
-        <input type="button" class="btn btn-warning" value="-" onmousedown="bb=setInterval('colorch(2)',200)" onmouseup="clearInterval(bb)">
-        <input type="button" class="btn btn-info" value="?" onmousedown="cc=setInterval(randcolor,200)" onmouseup="clearInterval(cc)">
-    </div>
+        <div id="taget" class="aa w-100 card" style="background-color:rgb(100,100,100);">
+            <span class="bb" id="word">BAA</span>
+        </div>
+        <hr>
+        <input type="button" class="btn btn-danger" value="R" onclick="alte('R')"><input class="cc" type="range"
+            id="ranR" min="0" max="255" step="1" onclick="ran(1)"><br>
+        <input type="button" class="btn btn-success mt-1" value="G" onclick="alte('G')"><input class="cc" type="range"
+            id="ranG" min="0" max="255" step="1" onclick="ran(2)"><br>
+        <input type="button" class="btn btn-primary mt-1" value="B" onclick="alte('B')"><input class="cc" type="range"
+            id="ranB" min="0" max="255" step="1" onclick="ran(3)"><br><br>
+        <div class="d-flex justify-content-lg-between">
+            <input type="button" class="btn btn-secondary" value="+" onmousedown="aa=setInterval('colorch(1)',200)"
+                onmouseup="clearInterval(aa)">
+            <input type="button" class="btn btn-warning" value="-" onmousedown="bb=setInterval('colorch(2)',200)"
+                onmouseup="clearInterval(bb)">
+            <input type="button" class="btn btn-info" value="?" onmousedown="cc=setInterval(randcolor,200)"
+                onmouseup="clearInterval(cc)">
+        </div>
     </div>
     <script>
         let note = document.getElementById('taget');
-        let color= note.style.backgroundColor;
-        randcolor();       
+        let color = note.style.backgroundColor;
+        randcolor();
         function alte(e) {
-            let t=prompt(`請輸入${e}值:`,'0');
-            if(t>=0 && t<=255){
-                let k=exploxx();
+            Swal.fire({
+                title: `請輸入RGB:${e}值`,
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: false,
+                confirmButtonText: '確認',
+                showLoaderOnConfirm: true,
+            }).then((result) => {
+                t=result.value;
+                if (t >= 0 && t <= 255) {
+                let k = exploxx();
                 switch (e) {
                     case "R":
-                        k[0]=t;
-                        document.getElementById('ranR').value=k[0];
+                        k[0] = t;
+                        document.getElementById('ranR').value = k[0];
                         break;
                     case "G":
-                        k[1]=t;
-                        document.getElementById('ranG').value=k[1];
+                        k[1] = t;
+                        document.getElementById('ranG').value = k[1];
                         break;
                     case "B":
-                        k[2]=t;
-                        document.getElementById('ranB').value=k[2]
+                        k[2] = t;
+                        document.getElementById('ranB').value = k[2]
                         break;
                 }
-                note.style.backgroundColor=`rgb(${k[0]},${k[1]},${k[2]})`;
+                note.style.backgroundColor = `rgb(${k[0]},${k[1]},${k[2]})`;
                 opp();
-            }else{
-                alert(`格式錯誤：請輸入:0~255的純阿拉伯數字`);
-            }
+            } else {
+                Swal.fire({
+                title: `格式錯誤`,
+                text:"請輸入:0~255的純阿拉伯數字",
+                showCancelButton: false,
+                confirmButtonText: '確認',
+                showLoaderOnConfirm: true,
+            })}
+            })
         }
         function randcolor() {
-            let R=Math.floor(Math.random() * 256);
-            let G=Math.floor(Math.random() * 256);
-            let B=Math.floor(Math.random() * 256);
-            document.getElementById('ranR').value=R;
-            document.getElementById('ranG').value=G;
-            document.getElementById('ranB').value=B;
-            note.style.backgroundColor=`rgb(${R},${G},${B})`;
+            let R = Math.floor(Math.random() * 256);
+            let G = Math.floor(Math.random() * 256);
+            let B = Math.floor(Math.random() * 256);
+            document.getElementById('ranR').value = R;
+            document.getElementById('ranG').value = G;
+            document.getElementById('ranB').value = B;
+            note.style.backgroundColor = `rgb(${R},${G},${B})`;
             opp();
         }
         function colorch(e) {
-            let k=exploxx();
-            if(e == 1){
+            let k = exploxx();
+            if (e == 1) {
                 k[0]++;
                 k[1]++;
                 k[2]++;
-            }else{
+            } else {
                 k[0]--;
                 k[1]--;
                 k[2]--;
             }
-            document.getElementById('ranR').value=k[0];
-            document.getElementById('ranG').value=k[1];
-            document.getElementById('ranB').value=k[2];
-            note.style.backgroundColor=`rgb(${k[0]},${k[1]},${k[2]})`; 
-            opp();             
-        }
-        function exploxx() {
-            color=note.style.backgroundColor;
-            let g=color.slice(4);
-            let b=g.substring(0,g.length-1)
-            let k=b.split(",")
-            return k ;
-        }
-        function opp() {
-            let k=exploxx();
-            let t0=Math.abs(k[0]-255);
-            let t1=Math.abs(k[1]-255);
-            let t2=Math.abs(k[2]-255);
-            let as=`rgb(${t0},${t1},${t2})`;
-            let a0 = (k[0]*1).toString(16);
-            let a1 = (k[1]*1).toString(16);
-            let a2 = (k[2]*1).toString(16);
-            document.getElementById('word').style.color=as;
-            document.getElementById('word').textContent=`#${a0}${a1}${a2}`;
-        }     
-        function ran(e) {
-            let k=exploxx();
-            switch (e) {
-                case 1:
-                k[0]=document.getElementById('ranR').value;
-                document.getElementById('ranR').value=k[0];
-                    break;
-                case 2:
-                k[1]=document.getElementById('ranG').value;
-                document.getElementById('ranG').value=k[1];
-                    break;
-                case 3:
-                k[2]=document.getElementById('ranB').value;   
-                document.getElementById('ranB').value=k[2];   
-                    break;
-            }        
-            note.style.backgroundColor=`rgb(${k[0]},${k[1]},${k[2]})`; 
+            document.getElementById('ranR').value = k[0];
+            document.getElementById('ranG').value = k[1];
+            document.getElementById('ranB').value = k[2];
+            note.style.backgroundColor = `rgb(${k[0]},${k[1]},${k[2]})`;
             opp();
         }
-    </script>       
+        function exploxx() {
+            color = note.style.backgroundColor;
+            let g = color.slice(4);
+            let b = g.substring(0, g.length - 1)
+            let k = b.split(",")
+            return k;
+        }
+        function opp() {
+            let k = exploxx();
+            let t0 = Math.abs(k[0] - 255);
+            let t1 = Math.abs(k[1] - 255);
+            let t2 = Math.abs(k[2] - 255);
+            let as = `rgb(${t0},${t1},${t2})`;
+            let a0 = (k[0] * 1).toString(16);
+            let a1 = (k[1] * 1).toString(16);
+            let a2 = (k[2] * 1).toString(16);
+            document.getElementById('word').style.color = as;
+            document.getElementById('word').textContent = `#${a0}${a1}${a2}`;
+        }
+        function ran(e) {
+            let k = exploxx();
+            switch (e) {
+                case 1:
+                    k[0] = document.getElementById('ranR').value;
+                    document.getElementById('ranR').value = k[0];
+                    break;
+                case 2:
+                    k[1] = document.getElementById('ranG').value;
+                    document.getElementById('ranG').value = k[1];
+                    break;
+                case 3:
+                    k[2] = document.getElementById('ranB').value;
+                    document.getElementById('ranB').value = k[2];
+                    break;
+            }
+            note.style.backgroundColor = `rgb(${k[0]},${k[1]},${k[2]})`;
+            opp();
+        }
+    </script>
 </body>
+
 </html>
