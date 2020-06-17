@@ -10,33 +10,35 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50vw;
-            height: 50vh;
+            height: 60vh;
         }
         .bb{
             font-weight: 500;
             font-size: 3rem;
         }
         .cc{
-            width: 500px;
+            width: 90%;
         }
         .btn{
-            width: 50px;
+            width: 10%;
+            font-size: 1.5rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-    <div id="taget" class="aa" style="background-color:rgb(100,100,100);">
+    <div class="container mt-5">
+    <div id="taget" class="aa w-100 card" style="background-color:rgb(100,100,100);">
     <span class="bb" id="word">BAA</span>
     </div>
     <hr>
     <input type="button" class="btn btn-danger" value="R" onclick="alte('R')"><input class="cc" type="range" id="ranR" min="0" max="255" step="1" onclick="ran(1)"><br>
     <input type="button" class="btn btn-success mt-1" value="G" onclick="alte('G')"><input class="cc" type="range" id="ranG"  min="0" max="255" step="1" onclick="ran(2)"><br>
     <input type="button" class="btn btn-primary mt-1" value="B" onclick="alte('B')"><input class="cc" type="range" id="ranB"  min="0" max="255" step="1" onclick="ran(3)"><br><br>
-    <input type="button" class="btn btn-secondary" value="+" onmousedown="aa=setInterval('colorch(1)',200)" onmouseup="clearInterval(aa)">
-    <input type="button" class="btn btn-warning" value="-" onmousedown="bb=setInterval('colorch(2)',200)" onmouseup="clearInterval(bb)">
-    <input type="button" class="btn btn-info" value="?" onmousedown="cc=setInterval(randcolor,200)" onmouseup="clearInterval(cc)">
+    <div class="d-flex justify-content-lg-between">
+        <input type="button" class="btn btn-secondary" value="+" onmousedown="aa=setInterval('colorch(1)',200)" onmouseup="clearInterval(aa)">
+        <input type="button" class="btn btn-warning" value="-" onmousedown="bb=setInterval('colorch(2)',200)" onmouseup="clearInterval(bb)">
+        <input type="button" class="btn btn-info" value="?" onmousedown="cc=setInterval(randcolor,200)" onmouseup="clearInterval(cc)">
+    </div>
     </div>
     <script>
         let note = document.getElementById('taget');
